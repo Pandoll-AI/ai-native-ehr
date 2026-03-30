@@ -44,7 +44,7 @@ export default function Hero() {
             {t("title")}
           </motion.h1>
         </div>
-        <div className="overflow-hidden">
+        <div className="mt-4 sm:mt-6 overflow-hidden">
           <motion.h1
             initial={{ opacity: 0, y: 80 }}
             animate={{ opacity: 1, y: 0 }}
