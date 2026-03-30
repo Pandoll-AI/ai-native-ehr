@@ -16,7 +16,6 @@ export default function Nav() {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      // Hide nav when scrolling down, show when scrolling up
       setVisible(y < 100 || y < lastScrollY.current);
       lastScrollY.current = y;
     };
@@ -36,14 +35,14 @@ export default function Nav() {
   ];
 
   return (
-    <>
-      {/* Floating glass navbar — auto-hide on scroll down */}
-      <nav
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[600px] transition-all duration-500 ${
-          visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-20 pointer-events-none"
-        }`}
-      >
-        <div className="glass rounded-full px-2 py-1.5 flex items-center justify-between">
+    <div
+      className={`fixed top-6 left-0 right-0 z-50 px-4 sm:px-6 transition-all duration-500 ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-20 pointer-events-none"
+      }`}
+    >
+      <div className="max-w-[700px] mx-auto flex items-center gap-2">
+        {/* Main navbar */}
+        <nav className="glass rounded-full px-2 py-1.5 flex-1 flex items-center justify-between">
           <a href={`/${locale}`} className="text-sm font-semibold tracking-tight text-white px-4">
             AI Native EHR
           </a>
@@ -82,10 +81,26 @@ export default function Nav() {
               {open ? <path d="M5 5l10 10M15 5L5 15" /> : <path d="M3 6h14M3 10h14M3 14h14" />}
             </svg>
           </button>
-        </div>
+        </nav>
 
-        {open && (
-          <div id="mobile-nav" className="glass rounded-3xl mt-2 px-6 py-5 flex flex-col gap-3">
+        {/* Globe language toggle — sits NEXT to nav, never overlaps */}
+        <button
+          onClick={toggleLocale}
+          aria-label={locale === "en" ? "Switch to Korean" : "Switch to English"}
+          className="shrink-0 w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/10 transition-all duration-300 group"
+        >
+          <svg aria-hidden="true" className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M12 21a9 9 0 100-18 9 9 0 000 18z" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M3.6 9h16.8M3.6 15h16.8" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M12 3a15.3 15.3 0 014 9 15.3 15.3 0 01-4 9 15.3 15.3 0 01-4-9 15.3 15.3 0 014-9z" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile dropdown */}
+      {open && (
+        <div className="max-w-[700px] mx-auto mt-2">
+          <div id="mobile-nav" className="glass rounded-3xl px-6 py-5 flex flex-col gap-3">
             {links.map((l) => (
               <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/60 hover:text-white py-2">
                 {l.label}
@@ -95,23 +110,8 @@ export default function Nav() {
               {t("earlyAccess")}
             </a>
           </div>
-        )}
-      </nav>
-
-      {/* Language toggle — also auto-hide */}
-      <button
-        onClick={toggleLocale}
-        aria-label={locale === "en" ? "Switch to Korean" : "Switch to English"}
-        className={`fixed top-6 right-6 z-50 w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/10 transition-all duration-500 group ${
-          visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-20 pointer-events-none"
-        }`}
-      >
-        <svg aria-hidden="true" className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 21a9 9 0 100-18 9 9 0 000 18z" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M3.6 9h16.8M3.6 15h16.8" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M12 3a15.3 15.3 0 014 9 15.3 15.3 0 01-4 9 15.3 15.3 0 01-4-9 15.3 15.3 0 014-9z" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
-    </>
+        </div>
+      )}
+    </div>
   );
 }
