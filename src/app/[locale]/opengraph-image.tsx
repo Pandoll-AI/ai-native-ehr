@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "AI Native EMR — The EMR Built for AI, Not Bolted On";
+export const alt = "AI Native EHR — EHR, Rebuilt from Scratch. For AI and Patients.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -16,66 +16,60 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "flex-end",
           padding: "80px",
-          backgroundColor: "#f7f6f2",
-          fontFamily: "serif",
+          backgroundColor: "#000000",
+          fontFamily: "Inter, sans-serif",
           position: "relative",
         }}
       >
-        {/* Grid overlay */}
+        {/* Emerald glow */}
         <div
           style={{
             position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
+            top: "20%",
+            right: "10%",
+            width: 400,
+            height: 400,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(52,211,153,0.15), transparent 70%)",
           }}
         />
-
-        {/* Vertical guide lines */}
-        <div style={{ position: "absolute", left: "25%", top: 0, bottom: 0, width: 1, backgroundColor: "#e5e4de" }} />
-        <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: 1, backgroundColor: "#e5e4de" }} />
-        <div style={{ position: "absolute", left: "75%", top: 0, bottom: 0, width: 1, backgroundColor: "#e5e4de" }} />
 
         {/* Label */}
         <div
           style={{
-            fontSize: 14,
-            fontFamily: "monospace",
-            letterSpacing: "0.25em",
+            fontSize: 12,
+            fontWeight: 700,
+            letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "#3d7068",
+            color: "#34D399",
             marginBottom: 24,
           }}
         >
-          AI Native EMR
+          AI Native EHR
         </div>
 
         {/* Main heading */}
         <div
           style={{
-            fontSize: 80,
-            fontWeight: 300,
-            color: "#1c1c1c",
-            lineHeight: 0.95,
-            textTransform: "uppercase",
-            letterSpacing: "-0.02em",
+            fontSize: 72,
+            fontWeight: 700,
+            color: "#ffffff",
+            lineHeight: 1.05,
+            letterSpacing: "-0.05em",
           }}
         >
-          THE EMR BUILT
+          EHR, Rebuilt
         </div>
         <div
           style={{
-            fontSize: 80,
-            fontWeight: 300,
-            color: "#B4B4B4",
-            lineHeight: 0.95,
-            textTransform: "uppercase",
-            fontStyle: "italic",
-            letterSpacing: "-0.02em",
+            fontSize: 72,
+            fontWeight: 700,
+            color: "#34D399",
+            lineHeight: 1.05,
+            letterSpacing: "-0.05em",
           }}
         >
-          FOR AI.
+          from Scratch.
         </div>
 
         {/* Bottom bar */}
@@ -84,16 +78,16 @@ export default async function Image() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            marginTop: 60,
+            marginTop: 48,
             paddingTop: 24,
-            borderTop: "1px solid #e5e4de",
+            borderTop: "1px solid rgba(255,255,255,0.1)",
           }}
         >
-          <div style={{ fontSize: 12, fontFamily: "monospace", letterSpacing: "0.2em", color: "#5a5a5a", textTransform: "uppercase" }}>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase" }}>
             Launching December 2026
           </div>
-          <div style={{ fontSize: 12, fontFamily: "monospace", letterSpacing: "0.2em", color: "#3d7068", textTransform: "uppercase" }}>
-            ainativeemr.com
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", color: "#34D399", textTransform: "uppercase" }}>
+            ainativeehr.com
           </div>
         </div>
       </div>

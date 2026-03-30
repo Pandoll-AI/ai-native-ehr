@@ -13,20 +13,20 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AI Native EMR — The EMR Built for AI",
+  title: "AI Native EHR — The EHR Built for AI",
   description:
     "A next-generation Electronic Medical Records system where AI is the foundation, not a plugin. Launching December 2026.",
-  metadataBase: new URL("https://ainativeemr.com"),
+  metadataBase: new URL("https://ainativeehr.com"),
   openGraph: {
-    title: "AI Native EMR — EMR, Rebuilt from Scratch.",
+    title: "AI Native EHR — EHR, Rebuilt from Scratch.",
     description: "Every vital sign, every lab, every note — alive with meaning, ready to act.",
-    siteName: "AI Native EMR",
+    siteName: "AI Native EHR",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Native EMR",
-    description: "EMR, Rebuilt from Scratch. For AI and Patients.",
+    title: "AI Native EHR",
+    description: "EHR, Rebuilt from Scratch. For AI and Patients.",
   },
 };
 

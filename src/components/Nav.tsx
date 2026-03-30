@@ -26,7 +26,7 @@ export default function Nav() {
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[672px]">
       <div className="glass rounded-full px-2 py-1.5 flex items-center justify-between">
         <a href={`/${locale}`} className="text-sm font-semibold tracking-tight text-white px-4">
-          AI Native EMR
+          AI Native EHR
         </a>
 
         <div className="hidden md:flex items-center gap-1">
