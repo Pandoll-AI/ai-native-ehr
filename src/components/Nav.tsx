@@ -2,7 +2,7 @@
 
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Nav() {
   const t = useTranslations("Nav");
@@ -10,6 +10,19 @@ export default function Nav() {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      // Hide nav when scrolling down, show when scrolling up
+      setVisible(y < 100 || y < lastScrollY.current);
+      lastScrollY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   function toggleLocale() {
     const next = locale === "en" ? "ko" : "en";
@@ -24,8 +37,12 @@ export default function Nav() {
 
   return (
     <>
-      {/* Floating glass navbar — center */}
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[600px]">
+      {/* Floating glass navbar — auto-hide on scroll down */}
+      <nav
+        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[600px] transition-all duration-500 ${
+          visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-20 pointer-events-none"
+        }`}
+      >
         <div className="glass rounded-full px-2 py-1.5 flex items-center justify-between">
           <a href={`/${locale}`} className="text-sm font-semibold tracking-tight text-white px-4">
             AI Native EHR
@@ -81,11 +98,13 @@ export default function Nav() {
         )}
       </nav>
 
-      {/* Language toggle — fixed top-right circle button */}
+      {/* Language toggle — also auto-hide */}
       <button
         onClick={toggleLocale}
         aria-label={locale === "en" ? "Switch to Korean" : "Switch to English"}
-        className="fixed top-6 right-6 z-50 w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/10 transition-all duration-300 group"
+        className={`fixed top-6 right-6 z-50 w-10 h-10 glass rounded-full flex items-center justify-center hover:bg-white/10 transition-all duration-500 group ${
+          visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-20 pointer-events-none"
+        }`}
       >
         <svg aria-hidden="true" className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M12 21a9 9 0 100-18 9 9 0 000 18z" strokeLinecap="round" strokeLinejoin="round" />

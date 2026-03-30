@@ -27,7 +27,7 @@ function ScrollFeature({ idx, featureKey, src, total, t }: {
   const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.92, 1, 1, 0.96]);
 
   return (
-    <div ref={ref} className="min-h-[80vh] lg:min-h-screen flex items-center py-16 lg:py-20">
+    <div ref={ref} className="min-h-[70vh] lg:min-h-[75vh] flex items-center py-8 lg:py-12">
       <div className="max-w-[1600px] mx-auto px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Text */}
@@ -80,7 +80,7 @@ export default function Features() {
     <section id="features" aria-labelledby="features-heading">
       {/* Section header — dark */}
       <div className="bg-dark">
-        <div className="max-w-[1600px] mx-auto px-8 pt-40 pb-16">
+        <div className="max-w-[1600px] mx-auto px-8 pt-24 pb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

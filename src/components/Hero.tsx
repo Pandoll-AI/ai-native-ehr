@@ -98,7 +98,7 @@ export default function Hero() {
       </section>
 
       {/* Sub-hero — dark with emerald tags */}
-      <section className="bg-dark py-32">
+      <section className="bg-dark pt-20 pb-12">
         <div className="max-w-[1600px] mx-auto px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
             <motion.div
