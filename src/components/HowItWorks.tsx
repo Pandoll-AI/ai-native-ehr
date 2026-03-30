@@ -7,84 +7,62 @@ export default function HowItWorks() {
   const t = useTranslations("HowItWorks");
 
   const steps = [
-    {
-      number: t("step1Number"),
-      title: t("step1Title"),
-      desc: t("step1Desc"),
-      icon: (
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
-          <path d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      ),
-    },
-    {
-      number: t("step2Number"),
-      title: t("step2Title"),
-      desc: t("step2Desc"),
-      icon: (
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
-          <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      ),
-    },
-    {
-      number: t("step3Number"),
-      title: t("step3Title"),
-      desc: t("step3Desc"),
-      icon: (
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
-          <path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      ),
-    },
+    { number: t("step1Number"), title: t("step1Title"), desc: t("step1Desc") },
+    { number: t("step2Number"), title: t("step2Title"), desc: t("step2Desc") },
+    { number: t("step3Number"), title: t("step3Title"), desc: t("step3Desc") },
   ];
 
   return (
-    <section id="how-it-works" aria-labelledby="hiw-heading" className="py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="how-it-works" aria-labelledby="hiw-heading" className="border-t border-border">
+      <div className="max-w-7xl mx-auto px-8 py-32">
+        {/* Header — asymmetric */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20"
         >
-          <span className="text-xs font-mono tracking-widest uppercase text-accent">
-            {t("label")}
-          </span>
-          <h2 id="hiw-heading" className="mt-4 text-3xl sm:text-5xl font-bold tracking-tight">
-            {t("title")}
-          </h2>
-          <p className="mt-4 text-lg text-muted max-w-xl mx-auto">
-            {t("subtitle")}
-          </p>
+          <div className="md:col-span-1">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
+              {t("label")}
+            </span>
+          </div>
+          <div className="md:col-span-3">
+            <h2 id="hiw-heading" className="font-serif text-4xl sm:text-5xl font-light tracking-tight leading-[1.1]">
+              {t("title")}
+            </h2>
+            <p className="mt-6 text-lg text-muted max-w-xl leading-relaxed">
+              {t("subtitle")}
+            </p>
+          </div>
         </motion.div>
 
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-0">
+        {/* Steps — vertical numbered list with left labels */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-border">
           {steps.map((step, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="relative p-10 text-center"
+              transition={{ duration: 0.6, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className={`p-10 sm:p-16 relative ${
+                i < steps.length - 1 ? "border-b md:border-b-0 md:border-r border-border" : ""
+              }`}
             >
-              {i < steps.length - 1 && (
-                <div aria-hidden="true" className="hidden md:block absolute top-1/2 -translate-y-1/2 right-0 w-px h-24 bg-border" />
-              )}
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
+                Step {step.number}
+              </span>
 
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-border text-accent mb-6">
-                {step.icon}
-              </div>
-
-              <div aria-hidden="true" className="text-6xl font-bold text-foreground/[0.06] font-mono absolute top-6 left-6">
+              <div aria-hidden="true" className="font-serif text-[6rem] font-light text-foreground/[0.04] absolute top-4 right-8 leading-none">
                 {step.number}
               </div>
 
-              <h3 className="text-2xl font-bold tracking-tight">{step.title}</h3>
-              {/* T-1: text-base (16px) instead of text-sm (14px) */}
-              <p className="mt-3 text-base text-muted leading-relaxed max-w-xs mx-auto">
+              <h3 className="mt-6 font-serif text-3xl font-light tracking-tight">
+                {step.title}
+              </h3>
+              <p className="mt-4 text-base text-muted leading-relaxed">
                 {step.desc}
               </p>
             </motion.div>

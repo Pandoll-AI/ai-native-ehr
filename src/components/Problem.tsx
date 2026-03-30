@@ -16,78 +16,89 @@ export default function Problem() {
   const newItems = t.raw("compareNewItems") as string[];
 
   return (
-    <section aria-labelledby="problem-heading" className="py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-6">
+    <section aria-labelledby="problem-heading" className="border-t border-border">
+      {/* Stats bar */}
+      <div className="border-b border-border">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border">
+            {stats.map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="py-16 px-8 first:pl-0 group hover:bg-surface transition-colors"
+              >
+                <div className="font-serif text-6xl sm:text-7xl font-light tracking-tight text-accent">
+                  {stat.value}
+                </div>
+                <div className="mt-3 text-base text-muted">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Problem statement */}
+      <div className="max-w-7xl mx-auto px-8 py-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20"
         >
-          <span className="text-xs font-mono tracking-widest uppercase text-accent">
-            {t("label")}
-          </span>
-          <h2 id="problem-heading" className="mt-4 text-3xl sm:text-5xl font-bold tracking-tight max-w-3xl">
-            {t("title")}
-          </h2>
-          <p className="mt-4 text-lg text-muted max-w-2xl">
-            {t("subtitle")}
-          </p>
+          <div className="md:col-span-1">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
+              {t("label")}
+            </span>
+          </div>
+          <div className="md:col-span-3">
+            <h2 id="problem-heading" className="font-serif text-4xl sm:text-5xl font-light tracking-tight leading-[1.1]">
+              {t("title")}
+            </h2>
+            <p className="mt-6 text-lg text-muted max-w-2xl leading-relaxed">
+              {t("subtitle")}
+            </p>
+          </div>
         </motion.div>
 
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="text-center sm:text-left"
-            >
-              <div className="text-5xl sm:text-6xl font-bold tracking-tight text-accent">
-                {stat.value}
-              </div>
-              <div className="mt-2 text-base text-muted">{stat.label}</div>
-            </motion.div>
-          ))}
-        </div>
-
+        {/* Comparison — asymmetric 2-col */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-0 border border-border rounded overflow-hidden"
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 md:grid-cols-2 border border-border"
         >
-          <div className="p-8 sm:p-12 bg-foreground/[0.02]">
-            <h3 className="text-sm font-mono uppercase tracking-wider text-muted mb-6">
+          <div className="p-10 sm:p-16 bg-foreground/[0.02] border-b md:border-b-0 md:border-r border-border">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted mb-8">
               {t("compareOld")}
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-5">
               {oldItems.map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-muted">
-                  {/* A-6: aria-hidden on decorative SVG */}
-                  <svg aria-hidden="true" className="w-5 h-5 mt-0.5 shrink-0 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                <li key={i} className="flex items-start gap-4 text-muted">
+                  <svg aria-hidden="true" className="w-4 h-4 mt-1 shrink-0 text-red-400/60" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" />
                   </svg>
-                  <span>{item}</span>
+                  <span className="text-base">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="p-8 sm:p-12 border-t md:border-t-0 md:border-l border-border">
-            <h3 className="text-sm font-mono uppercase tracking-wider text-accent mb-6">
+          <div className="p-10 sm:p-16">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent mb-8">
               {t("compareNew")}
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-5">
               {newItems.map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <svg aria-hidden="true" className="w-5 h-5 mt-0.5 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
+                <li key={i} className="flex items-start gap-4">
+                  <svg aria-hidden="true" className="w-4 h-4 mt-1 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
                   </svg>
-                  <span className="font-medium">{item}</span>
+                  <span className="text-base font-medium">{item}</span>
                 </li>
               ))}
             </ul>

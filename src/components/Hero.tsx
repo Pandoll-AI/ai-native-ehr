@@ -7,75 +7,89 @@ export default function Hero() {
   const t = useTranslations("Hero");
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,102,255,0.04),transparent_50%)]" />
+    <section className="relative min-h-screen flex items-end pb-32 pt-20">
+      {/* Decorative vertical lines */}
+      <div aria-hidden="true" className="absolute inset-0 max-w-7xl mx-auto px-8">
+        <div className="h-full relative">
+          <div className="absolute left-0 top-0 bottom-0 w-px bg-border" />
+          <div className="absolute left-1/4 top-0 bottom-0 w-px bg-border hidden md:block" />
+          <div className="absolute left-1/2 top-0 bottom-0 w-px bg-border hidden md:block" />
+          <div className="absolute left-3/4 top-0 bottom-0 w-px bg-border hidden md:block" />
+          <div className="absolute right-0 top-0 bottom-0 w-px bg-border" />
+        </div>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-32 w-full">
-        <div className="max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-block text-xs font-mono tracking-widest uppercase text-accent mb-6 px-3 py-1 border border-accent/20 rounded-full">
-              {t("tagline")}
-            </span>
-          </motion.div>
-
-          {/* T-2: leading-[1.05] instead of 0.95, M-2: add md:text-6xl step */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05]"
-          >
-            {t("title")}
-            <br />
-            <span className="text-accent">{t("titleAccent")}</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-8 text-lg sm:text-xl text-muted max-w-2xl leading-relaxed"
-          >
-            {t("subtitle")}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 flex flex-col sm:flex-row gap-4"
-          >
-            <a
-              href="#early-access"
-              className="inline-flex items-center justify-center px-8 py-4 text-base font-medium bg-foreground text-background rounded hover:bg-foreground/90 active:bg-foreground/80 transition-colors"
+      <div className="max-w-7xl mx-auto px-8 w-full relative">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Main heading — spans 3 columns */}
+          <div className="md:col-span-3">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              {t("cta")}
-            </a>
-            {/* UX-3: changed #demo to #features since no demo section exists yet */}
-            <a
-              href="#features"
-              className="inline-flex items-center justify-center px-8 py-4 text-base font-medium border border-border rounded hover:bg-foreground/5 transition-colors gap-2"
-            >
-              {/* A-5: aria-hidden on decorative SVG */}
-              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M6.5 3.5l6 4.5-6 4.5V3.5z" />
-              </svg>
-              {t("ctaSecondary")}
-            </a>
-          </motion.div>
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
+                {t("tagline")}
+              </span>
+            </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-8 text-sm text-muted font-mono"
-          >
-            {t("launchDate")}
-          </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-8 font-serif text-[clamp(3rem,9vw,8rem)] font-light tracking-tight leading-[0.95] uppercase"
+            >
+              {t("title")}
+              <br />
+              <span className="italic text-accent">{t("titleAccent")}</span>
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-12 flex flex-col sm:flex-row gap-4"
+            >
+              <a
+                href="#early-access"
+                className="group inline-flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.25em] px-8 py-4 bg-accent text-white transition-all hover:tracking-[0.4em]"
+              >
+                {t("cta")}
+              </a>
+              <a
+                href="#features"
+                className="inline-flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.25em] px-8 py-4 border border-border hover:bg-foreground/5 transition-all gap-3"
+              >
+                <svg aria-hidden="true" width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M6.5 3.5l6 4.5-6 4.5V3.5z" />
+                </svg>
+                {t("ctaSecondary")}
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right column — subtitle + launch date */}
+          <div className="md:col-span-1 flex flex-col justify-end">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-base text-muted leading-relaxed"
+            >
+              {t("subtitle")}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="mt-8 pt-4 border-t border-border"
+            >
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
+                {t("launchDate")}
+              </span>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

@@ -14,68 +14,67 @@ export default function Timeline() {
   ];
 
   return (
-    <section id="roadmap" aria-labelledby="roadmap-heading" className="py-32 border-t border-border">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="roadmap" aria-labelledby="roadmap-heading" className="border-t border-border">
+      <div className="max-w-7xl mx-auto px-8 py-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20"
         >
-          <span className="text-xs font-mono tracking-widest uppercase text-accent">
-            {t("label")}
-          </span>
-          <h2 id="roadmap-heading" className="mt-4 text-3xl sm:text-5xl font-bold tracking-tight">
-            {t("title")}
-          </h2>
-          <p className="mt-4 text-lg text-muted max-w-2xl">{t("subtitle")}</p>
+          <div className="md:col-span-1">
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
+              {t("label")}
+            </span>
+          </div>
+          <div className="md:col-span-3">
+            <h2 id="roadmap-heading" className="font-serif text-4xl sm:text-5xl font-light tracking-tight leading-[1.1]">
+              {t("title")}
+            </h2>
+            <p className="mt-6 text-lg text-muted max-w-2xl leading-relaxed">{t("subtitle")}</p>
+          </div>
         </motion.div>
 
-        <div className="mt-20 relative">
-          {/* L-3: aria-hidden on decorative timeline axis */}
-          <div aria-hidden="true" className="hidden md:block absolute top-8 left-0 right-0 h-px bg-border" />
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {quarters.map((q, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative"
-              >
-                <div aria-hidden="true" className="hidden md:flex items-center justify-center w-4 h-4 rounded-full border-2 bg-surface absolute -top-[1.625rem] left-0 z-10"
-                  style={{
-                    borderColor: q.status === "completed" ? "var(--accent)" : q.status === "current" ? "var(--accent)" : "var(--border)",
-                    backgroundColor: q.status === "completed" ? "var(--accent)" : "var(--surface)",
-                  }}
-                >
-                  {q.status === "current" && (
-                    <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  )}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-0 border border-border">
+          {quarters.map((q, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className={`p-8 sm:p-10 relative ${
+                i < quarters.length - 1 ? "border-b md:border-b-0 md:border-r border-border" : ""
+              } ${q.status === "current" ? "bg-surface" : ""}`}
+            >
+              {/* Top accent bar for current */}
+              {q.status === "current" && (
+                <div aria-hidden="true" className="absolute top-0 left-0 right-0 h-[2px] bg-accent overflow-hidden">
+                  <div className="h-full w-1/3 bg-technical-blue" style={{ animation: "scanline 2s linear infinite" }} />
                 </div>
+              )}
+              {q.status === "completed" && (
+                <div aria-hidden="true" className="absolute top-0 left-0 right-0 h-[2px] bg-accent" />
+              )}
 
-                <div className="md:pt-8">
-                  <span className="text-xs font-mono text-muted">{q.label}</span>
-                  <h3 className="mt-2 text-lg font-semibold tracking-tight">{q.title}</h3>
-                  {/* T-1: text-base (16px) instead of text-sm (14px) */}
-                  <p className="mt-2 text-base text-muted leading-relaxed">{q.desc}</p>
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">{q.label}</span>
+              <h3 className="mt-4 font-serif text-xl font-light tracking-tight">{q.title}</h3>
+              <p className="mt-3 text-base text-muted leading-relaxed">{q.desc}</p>
 
-                  {q.status === "completed" && (
-                    <span className="inline-block mt-3 text-[10px] font-mono uppercase tracking-wider text-accent px-2 py-0.5 border border-accent/20 rounded">
-                      {t("completedLabel")}
-                    </span>
-                  )}
-                  {q.status === "current" && (
-                    <span className="inline-block mt-3 text-[10px] font-mono uppercase tracking-wider text-accent px-2 py-0.5 bg-accent/10 border border-accent/20 rounded">
-                      {t("currentLabel")}
-                    </span>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              {q.status === "completed" && (
+                <span className="inline-block mt-4 font-mono text-[9px] uppercase tracking-[0.2em] text-accent px-2 py-1 border border-accent/20">
+                  {t("completedLabel")}
+                </span>
+              )}
+              {q.status === "current" && (
+                <span className="inline-flex items-center gap-2 mt-4 font-mono text-[9px] uppercase tracking-[0.2em] text-accent px-2 py-1 bg-accent/10 border border-accent/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                  {t("currentLabel")}
+                </span>
+              )}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

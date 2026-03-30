@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafafa;
-  --foreground: #0a0a0a;
-  --accent: #0066ff;
-  --accent-light: #e6f0ff;
-  --muted: #5c5c5c;
-  --border: #e5e5e5;
+  --background: #f7f6f2;
+  --foreground: #1c1c1c;
+  --accent: #3d7068;
+  --accent-light: #e8f0ee;
+  --muted: #5a5a5a;
+  --border: #e5e4de;
   --surface: #ffffff;
+  --technical-blue: #3b82f6;
+  --grid-color: rgba(0, 0, 0, 0.04);
 }
 
 @theme inline {
@@ -18,8 +20,10 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-surface: var(--surface);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-technical-blue: var(--technical-blue);
+  --font-sans: var(--font-space-grotesk);
+  --font-serif: var(--font-playfair);
+  --font-mono: var(--font-space-mono);
 }
 
 body {
@@ -37,13 +41,27 @@ html {
   scroll-behavior: smooth;
 }
 
-/* A-13: Global focus ring for keyboard navigation */
+/* Fixed background grid — 40px squares */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* Global focus ring */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
-/* An-1: Respect prefers-reduced-motion */
+/* prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -53,6 +71,12 @@ html {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Scan-line animation */
+@keyframes scanline {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 @keyframes waveform {
