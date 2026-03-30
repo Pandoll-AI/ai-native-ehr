@@ -79,8 +79,8 @@ export default function Features() {
               <p className="text-base text-muted leading-relaxed">{f.desc}</p>
 
               {f.mockup && (
-                <div className="mt-4 hidden lg:flex justify-center">
-                  <div className="w-[180px] border border-border overflow-hidden">
+                <div className="mt-4 flex justify-center">
+                  <div className="w-[160px] sm:w-[180px] border border-border overflow-hidden">
                     <Image
                       src={f.mockup}
                       alt={f.title}
