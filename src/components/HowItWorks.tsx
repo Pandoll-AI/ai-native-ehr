@@ -71,7 +71,7 @@ export default function HowItWorks() {
             transition={{ duration: 1, ease }}
             className="flex items-center justify-center"
           >
-            <div className="relative w-full max-w-[400px]" style={{ transform: "perspective(1000px) rotateY(-2deg) rotateX(1deg)" }}>
+            <div className="relative w-full max-w-[340px] lg:max-w-[400px] lg:[transform:perspective(1000px)_rotateY(-2deg)_rotateX(1deg)]">
               {/* Patient data flow card */}
               <div className="glass rounded-2xl overflow-hidden">
                 {/* Header */}

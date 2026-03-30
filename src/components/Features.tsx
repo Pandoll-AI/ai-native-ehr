@@ -27,7 +27,7 @@ function ScrollFeature({ idx, featureKey, src, total, t }: {
   const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.92, 1, 1, 0.96]);
 
   return (
-    <div ref={ref} className="min-h-screen flex items-center py-20">
+    <div ref={ref} className="min-h-[80vh] lg:min-h-screen flex items-center py-16 lg:py-20">
       <div className="max-w-[1600px] mx-auto px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Text */}
@@ -52,10 +52,10 @@ function ScrollFeature({ idx, featureKey, src, total, t }: {
             style={{ opacity, scale }}
             className={`flex justify-center ${idx % 2 === 1 ? "lg:order-1" : ""}`}
           >
-            <div className="w-[240px] sm:w-[280px]">
-              <div className="rounded-[36px] bg-zinc p-[6px] shadow-[0_30px_80px_-15px_rgba(52,211,153,0.2)]">
-                <div aria-hidden="true" className="absolute top-0 left-1/2 -translate-x-1/2 w-[90px] h-[24px] bg-zinc rounded-b-[12px] z-10" />
-                <div className="rounded-[30px] overflow-hidden bg-white relative">
+            <div className="w-[220px] sm:w-[260px]">
+              <div className="relative rounded-[36px] bg-zinc p-[6px] shadow-[0_30px_80px_-15px_rgba(52,211,153,0.2)]">
+                <div aria-hidden="true" className="absolute top-[2px] left-1/2 -translate-x-1/2 w-[80px] h-[22px] bg-zinc rounded-b-[11px] z-10" />
+                <div className="rounded-[30px] overflow-hidden bg-white">
                   <Image
                     src={src}
                     alt={t(`${featureKey}Title`)}
@@ -80,7 +80,7 @@ export default function Features() {
     <section id="features" aria-labelledby="features-heading">
       {/* Section header — dark */}
       <div className="bg-dark">
-        <div className="max-w-[1600px] mx-auto px-8 pt-32 pb-16">
+        <div className="max-w-[1600px] mx-auto px-8 pt-40 pb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -116,7 +116,7 @@ export default function Features() {
       </div>
 
       {/* Secondary features — light horizontal cards */}
-      <div className="bg-light py-32">
+      <div className="bg-light py-20">
         <div className="max-w-[1600px] mx-auto px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
