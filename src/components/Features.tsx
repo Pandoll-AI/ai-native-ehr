@@ -1,25 +1,20 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { useMemo } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import AIChartingMockup from "./mockups/AIChartingMockup";
-import SmartOrderMockup from "./mockups/SmartOrderMockup";
-import DiagnosisCodingMockup from "./mockups/DiagnosisCodingMockup";
-import PatientSummaryMockup from "./mockups/PatientSummaryMockup";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
+const mockupImages: Record<string, string> = {
+  f1: "/mockups/ai-charting.png",
+  f2: "/mockups/smart-orders.png",
+  f3: "/mockups/diagnosis-coding.png",
+  f5: "/mockups/patient-summary.png",
+};
+
 export default function Features() {
   const t = useTranslations("Features");
-
-  const mockupComponents: Record<string, ReactNode> = useMemo(() => ({
-    f1: <AIChartingMockup />,
-    f2: <SmartOrderMockup />,
-    f3: <DiagnosisCodingMockup />,
-    f5: <PatientSummaryMockup />,
-  }), []);
 
   const features = Array.from({ length: 8 }, (_, i) => {
     const key = `f${i + 1}`;
@@ -30,7 +25,7 @@ export default function Features() {
       desc: t(`${key}Desc`),
       tag: t(`${key}Tag`),
       isPrimary: i < 4,
-      mockup: mockupComponents[key] || null,
+      mockup: mockupImages[key] || null,
     };
   });
 
@@ -57,7 +52,7 @@ export default function Features() {
           </div>
         </motion.div>
 
-        {/* Bento grid — max 2px border-radius */}
+        {/* Bento grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
           {features.map((f, i) => (
             <motion.div
@@ -85,11 +80,19 @@ export default function Features() {
 
               {f.mockup && (
                 <div className="mt-4 hidden lg:flex justify-center">
-                  {f.mockup}
+                  <div className="w-[180px] border border-border overflow-hidden">
+                    <Image
+                      src={f.mockup}
+                      alt={f.title}
+                      width={375}
+                      height={812}
+                      className="w-full h-auto"
+                    />
+                  </div>
                 </div>
               )}
 
-              {/* Scan-line accent — #3b82f6 per template spec */}
+              {/* Scan-line accent */}
               <div aria-hidden="true" className="mt-auto h-[2px] bg-border overflow-hidden">
                 <div className="h-full w-1/3 bg-technical-blue opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ animation: "scanline 2s linear infinite", transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }} />
               </div>
