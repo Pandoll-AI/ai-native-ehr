@@ -103,7 +103,8 @@
     "button": "Request Early Access",
     "note": "No spam. We'll notify you when early access opens.",
     "demo": "Or schedule a live demo →",
-    "success": "Thank you! We'll notify you when early access opens."
+    "success": "Thank you! We'll notify you when early access opens.",
+    "errorInvalid": "Please enter a valid email address."
   },
   "Footer": {
     "brand": "AI Native EMR",

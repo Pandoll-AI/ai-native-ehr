@@ -16,7 +16,7 @@ export default function Problem() {
   const newItems = t.raw("compareNewItems") as string[];
 
   return (
-    <section className="py-32 border-t border-border">
+    <section aria-labelledby="problem-heading" className="py-32 border-t border-border">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -27,7 +27,7 @@ export default function Problem() {
           <span className="text-xs font-mono tracking-widest uppercase text-accent">
             {t("label")}
           </span>
-          <h2 className="mt-4 text-3xl sm:text-5xl font-bold tracking-tight max-w-3xl">
+          <h2 id="problem-heading" className="mt-4 text-3xl sm:text-5xl font-bold tracking-tight max-w-3xl">
             {t("title")}
           </h2>
           <p className="mt-4 text-lg text-muted max-w-2xl">
@@ -48,7 +48,7 @@ export default function Problem() {
               <div className="text-5xl sm:text-6xl font-bold tracking-tight text-accent">
                 {stat.value}
               </div>
-              <div className="mt-2 text-sm text-muted">{stat.label}</div>
+              <div className="mt-2 text-base text-muted">{stat.label}</div>
             </motion.div>
           ))}
         </div>
@@ -67,7 +67,8 @@ export default function Problem() {
             <ul className="space-y-4">
               {oldItems.map((item, i) => (
                 <li key={i} className="flex items-start gap-3 text-muted">
-                  <svg className="w-5 h-5 mt-0.5 shrink-0 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                  {/* A-6: aria-hidden on decorative SVG */}
+                  <svg aria-hidden="true" className="w-5 h-5 mt-0.5 shrink-0 text-red-400" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" />
                   </svg>
                   <span>{item}</span>
@@ -83,7 +84,7 @@ export default function Problem() {
             <ul className="space-y-4">
               {newItems.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <svg className="w-5 h-5 mt-0.5 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
+                  <svg aria-hidden="true" className="w-5 h-5 mt-0.5 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
                   </svg>
                   <span className="font-medium">{item}</span>

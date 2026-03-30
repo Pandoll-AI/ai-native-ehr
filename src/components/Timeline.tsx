@@ -14,7 +14,7 @@ export default function Timeline() {
   ];
 
   return (
-    <section id="roadmap" className="py-32 border-t border-border">
+    <section id="roadmap" aria-labelledby="roadmap-heading" className="py-32 border-t border-border">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -25,14 +25,15 @@ export default function Timeline() {
           <span className="text-xs font-mono tracking-widest uppercase text-accent">
             {t("label")}
           </span>
-          <h2 className="mt-4 text-3xl sm:text-5xl font-bold tracking-tight">
+          <h2 id="roadmap-heading" className="mt-4 text-3xl sm:text-5xl font-bold tracking-tight">
             {t("title")}
           </h2>
           <p className="mt-4 text-lg text-muted max-w-2xl">{t("subtitle")}</p>
         </motion.div>
 
         <div className="mt-20 relative">
-          <div className="hidden md:block absolute top-8 left-0 right-0 h-px bg-border" />
+          {/* L-3: aria-hidden on decorative timeline axis */}
+          <div aria-hidden="true" className="hidden md:block absolute top-8 left-0 right-0 h-px bg-border" />
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {quarters.map((q, i) => (
@@ -44,7 +45,7 @@ export default function Timeline() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="relative"
               >
-                <div className="hidden md:flex items-center justify-center w-4 h-4 rounded-full border-2 bg-surface absolute -top-[1.625rem] left-0 z-10"
+                <div aria-hidden="true" className="hidden md:flex items-center justify-center w-4 h-4 rounded-full border-2 bg-surface absolute -top-[1.625rem] left-0 z-10"
                   style={{
                     borderColor: q.status === "completed" ? "var(--accent)" : q.status === "current" ? "var(--accent)" : "var(--border)",
                     backgroundColor: q.status === "completed" ? "var(--accent)" : "var(--surface)",
@@ -58,7 +59,8 @@ export default function Timeline() {
                 <div className="md:pt-8">
                   <span className="text-xs font-mono text-muted">{q.label}</span>
                   <h3 className="mt-2 text-lg font-semibold tracking-tight">{q.title}</h3>
-                  <p className="mt-2 text-sm text-muted leading-relaxed">{q.desc}</p>
+                  {/* T-1: text-base (16px) instead of text-sm (14px) */}
+                  <p className="mt-2 text-base text-muted leading-relaxed">{q.desc}</p>
 
                   {q.status === "completed" && (
                     <span className="inline-block mt-3 text-[10px] font-mono uppercase tracking-wider text-accent px-2 py-0.5 border border-accent/20 rounded">
