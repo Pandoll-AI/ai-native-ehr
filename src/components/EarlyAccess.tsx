@@ -4,6 +4,8 @@ import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 export default function EarlyAccess() {
   const t = useTranslations("CTA");
   const [submitted, setSubmitted] = useState(false);
@@ -12,85 +14,68 @@ export default function EarlyAccess() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
-    const form = e.currentTarget;
-    const email = new FormData(form).get("email") as string;
-    if (!email || !email.includes("@")) {
-      setError(t("errorInvalid"));
-      return;
-    }
+    const email = new FormData(e.currentTarget).get("email") as string;
+    if (!email || !email.includes("@")) { setError(t("errorInvalid")); return; }
     console.log("Early access signup:", email);
     setSubmitted(true);
   }
 
   return (
-    <section id="early-access" aria-labelledby="cta-heading" className="border-t border-border">
-      <div className="max-w-7xl mx-auto px-8 py-32">
+    <section id="early-access" aria-labelledby="cta-heading" className="relative bg-dark grain overflow-hidden py-32">
+      <div className="absolute inset-0 glow-emerald opacity-50" />
+
+      <div className="relative z-10 max-w-[1600px] mx-auto px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center"
+          transition={{ duration: 0.8, ease }}
+          className="max-w-2xl mx-auto text-center"
         >
-          {/* Left — large serif heading */}
-          <div>
-            <h2 id="cta-heading" className="font-serif text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.1]">
-              {t("title")}
-            </h2>
-            <p className="mt-6 text-lg text-muted leading-relaxed">{t("subtitle")}</p>
+          <h2 id="cta-heading" className="text-4xl sm:text-5xl font-bold tracking-[-0.05em] leading-[1.05] text-white">
+            {t("title")}
+          </h2>
+          <p className="mt-4 text-base text-white/50 font-light">{t("subtitle")}</p>
+
+          <div aria-live="polite" aria-atomic="true" className="mt-10">
+            {submitted ? (
+              <div className="glass rounded-2xl p-8">
+                <p className="text-emerald font-semibold text-lg">{t("success")}</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" noValidate>
+                <div className="flex-1">
+                  <label htmlFor="email-input" className="sr-only">{t("placeholder")}</label>
+                  <input
+                    id="email-input"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder={t("placeholder")}
+                    aria-describedby={error ? "email-error" : undefined}
+                    aria-invalid={error ? "true" : undefined}
+                    className={`w-full glass rounded-full px-6 py-3.5 text-sm text-white placeholder:text-white/30 focus:outline-none transition-colors ${
+                      error ? "border-red-400" : "focus:border-emerald/50"
+                    }`}
+                  />
+                  {error && <p id="email-error" role="alert" className="mt-2 text-[10px] text-red-400 text-left pl-6">{error}</p>}
+                </div>
+                <button
+                  type="submit"
+                  className="bg-emerald text-zinc-900 rounded-full px-8 py-3.5 text-sm font-semibold hover:scale-105 transition-transform duration-300 whitespace-nowrap"
+                >
+                  {t("button")}
+                </button>
+              </form>
+            )}
           </div>
 
-          {/* Right — form */}
-          <div>
-            <div aria-live="polite" aria-atomic="true">
-              {submitted ? (
-                <div className="p-10 border border-accent/20 bg-accent/5">
-                  <p className="text-accent font-medium text-lg">{t("success")}</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-                  <div>
-                    <label htmlFor="email-input" className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
-                      Email
-                    </label>
-                    <input
-                      id="email-input"
-                      name="email"
-                      type="email"
-                      required
-                      placeholder={t("placeholder")}
-                      aria-describedby={error ? "email-error" : undefined}
-                      aria-invalid={error ? "true" : undefined}
-                      className={`mt-2 w-full px-0 py-4 text-lg bg-transparent border-b-2 focus:outline-none transition-colors font-mono placeholder:text-muted/40 ${
-                        error ? "border-red-400" : "border-border focus:border-accent"
-                      }`}
-                    />
-                    {error && (
-                      <p id="email-error" role="alert" className="mt-2 font-mono text-[10px] text-red-500">
-                        {error}
-                      </p>
-                    )}
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full font-mono text-[10px] uppercase tracking-[0.25em] px-8 py-4 bg-accent text-white transition-all hover:tracking-[0.4em] mt-6"
-                  >
-                    {t("button")}
-                  </button>
-                </form>
-              )}
-            </div>
+          <p className="mt-6 text-[10px] text-white/30 tracking-wide">{t("note")}</p>
 
-            <p className="mt-6 font-mono text-[10px] text-muted tracking-wide">{t("note")}</p>
-
-            <div className="mt-6 pt-4 border-t border-border">
-              <a
-                href="mailto:hello@ainativeemr.com"
-                className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent hover:underline"
-              >
-                {t("demo")}
-              </a>
-            </div>
+          <div className="mt-6">
+            <a href="mailto:hello@ainativeemr.com" className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald hover:underline">
+              {t("demo")}
+            </a>
           </div>
         </motion.div>
       </div>

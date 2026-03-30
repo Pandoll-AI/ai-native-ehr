@@ -3,6 +3,8 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 export default function Timeline() {
   const t = useTranslations("Timeline");
 
@@ -14,62 +16,56 @@ export default function Timeline() {
   ];
 
   return (
-    <section id="roadmap" aria-labelledby="roadmap-heading" className="border-t border-border">
-      <div className="max-w-7xl mx-auto px-8 py-32">
+    <section id="roadmap" aria-labelledby="roadmap-heading" className="bg-light py-32">
+      <div className="max-w-[1600px] mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20"
+          transition={{ duration: 0.8, ease }}
+          className="text-center mb-16"
         >
-          <div className="md:col-span-1">
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
-              {t("label")}
-            </span>
-          </div>
-          <div className="md:col-span-3">
-            <h2 id="roadmap-heading" className="font-serif text-4xl sm:text-5xl font-light tracking-tight leading-[1.1]">
-              {t("title")}
-            </h2>
-            <p className="mt-6 text-lg text-muted max-w-2xl leading-relaxed">{t("subtitle")}</p>
-          </div>
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald">{t("label")}</span>
+          <h2 id="roadmap-heading" className="mt-4 text-4xl sm:text-5xl font-bold tracking-[-0.05em] leading-[1.05] text-zinc">
+            {t("title")}
+          </h2>
+          <p className="mt-4 text-base text-text-muted max-w-xl mx-auto font-light">{t("subtitle")}</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-0 border border-border">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {quarters.map((q, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className={`p-8 sm:p-10 relative ${
-                i < quarters.length - 1 ? "border-b md:border-b-0 md:border-r border-border" : ""
-              } ${q.status === "current" ? "bg-surface" : ""}`}
+              transition={{ duration: 0.7, delay: i * 0.1, ease }}
+              className={`relative rounded-2xl border p-6 transition-all duration-300 hover:scale-105 ${
+                q.status === "current"
+                  ? "bg-zinc text-white border-zinc"
+                  : "bg-white border-zinc-100 text-zinc"
+              }`}
             >
-              {/* Top accent bar for current */}
-              {q.status === "current" && (
-                <div aria-hidden="true" className="absolute top-0 left-0 right-0 h-[2px] bg-accent overflow-hidden">
-                  <div className="h-full w-1/3 bg-technical-blue" style={{ animation: "scanline 2s linear infinite" }} />
-                </div>
-              )}
               {q.status === "completed" && (
-                <div aria-hidden="true" className="absolute top-0 left-0 right-0 h-[2px] bg-accent" />
+                <div aria-hidden="true" className="absolute top-0 left-6 right-6 h-[2px] bg-emerald rounded-full" />
               )}
 
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">{q.label}</span>
-              <h3 className="mt-4 font-serif text-xl font-light tracking-tight">{q.title}</h3>
-              <p className="mt-3 text-base text-muted leading-relaxed">{q.desc}</p>
+              <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${q.status === "current" ? "text-emerald" : "text-text-muted"}`}>
+                {q.label}
+              </span>
+              <h3 className="mt-3 text-lg font-semibold tracking-tight">{q.title}</h3>
+              <p className={`mt-2 text-sm leading-relaxed font-light ${q.status === "current" ? "text-white/60" : "text-text-muted"}`}>
+                {q.desc}
+              </p>
 
               {q.status === "completed" && (
-                <span className="inline-block mt-4 font-mono text-[9px] uppercase tracking-[0.2em] text-accent px-2 py-1 border border-accent/20">
+                <span className="inline-block mt-4 text-[9px] font-bold uppercase tracking-[0.2em] text-emerald">
                   {t("completedLabel")}
                 </span>
               )}
               {q.status === "current" && (
-                <span className="inline-flex items-center gap-2 mt-4 font-mono text-[9px] uppercase tracking-[0.2em] text-accent px-2 py-1 bg-accent/10 border border-accent/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                <span className="inline-flex items-center gap-2 mt-4 text-[9px] font-bold uppercase tracking-[0.2em] text-emerald">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald animate-pulse" />
                   {t("currentLabel")}
                 </span>
               )}

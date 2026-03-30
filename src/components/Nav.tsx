@@ -2,26 +2,18 @@
 
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Nav() {
   const t = useTranslations("Nav");
-  const currentLocale = useLocale();
+  const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const [open, setOpen] = useState(false);
 
   function toggleLocale() {
-    const newLocale = currentLocale === "en" ? "ko" : "en";
-    const pathWithoutLocale = pathname.replace(new RegExp(`^/${currentLocale}`), "");
-    router.push(`/${newLocale}${pathWithoutLocale || ""}`);
+    const next = locale === "en" ? "ko" : "en";
+    router.push(pathname.replace(new RegExp(`^/${locale}`), `/${next}`));
   }
 
   const links = [
@@ -31,89 +23,63 @@ export default function Nav() {
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border"
-          : "bg-transparent"
-      }`}
-      style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
-    >
-      <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
-        {/* Brand with flanking bars */}
-        <a href={`/${currentLocale}`} className="flex items-center gap-3">
-          <span aria-hidden="true" className="w-6 h-px bg-foreground" />
-          <span className="font-serif text-xl tracking-tight uppercase">AI Native EMR</span>
-          <span aria-hidden="true" className="w-6 h-px bg-foreground" />
+    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[672px]">
+      <div className="glass rounded-full px-2 py-1.5 flex items-center justify-between">
+        <a href={`/${locale}`} className="text-sm font-semibold tracking-tight text-white px-4">
+          AI Native EMR
         </a>
 
-        <div className="hidden md:flex items-center gap-10">
-          {links.map((link) => (
+        <div className="hidden md:flex items-center gap-1">
+          {links.map((l) => (
             <a
-              key={link.href}
-              href={link.href}
-              className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted hover:text-foreground transition-colors duration-700"
-              style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+              key={l.href}
+              href={l.href}
+              className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/60 hover:text-white hover:bg-white/10 rounded-full px-4 py-2 transition-all duration-300"
             >
-              {link.label}
+              {l.label}
             </a>
           ))}
-        </div>
-
-        <div className="flex items-center gap-4">
           <button
             onClick={toggleLocale}
-            aria-label={currentLocale === "en" ? "Switch to Korean" : "Switch to English"}
-            className="font-mono text-[10px] uppercase tracking-[0.25em] px-4 py-3 min-w-[44px] min-h-[44px] flex items-center justify-center border border-border hover:bg-foreground/5 transition-all duration-700"
-            style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+            aria-label={locale === "en" ? "Switch to Korean" : "Switch to English"}
+            className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/60 hover:text-white hover:bg-white/10 rounded-full px-4 py-2 min-w-[44px] min-h-[44px] flex items-center justify-center transition-all duration-300"
           >
-            {currentLocale === "en" ? "한국어" : "EN"}
+            {locale === "en" ? "KO" : "EN"}
           </button>
-
           <a
             href="#early-access"
-            className="cta-overlay hidden md:inline-flex font-mono text-[10px] uppercase tracking-[0.25em] px-6 py-3 bg-accent text-white transition-all duration-700 hover:tracking-[0.4em]"
-            style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+            className="ml-1 bg-white text-zinc-900 text-[11px] font-bold uppercase tracking-[0.1em] rounded-full pl-5 pr-2 py-2 flex items-center gap-2 hover:scale-105 transition-transform duration-300"
           >
             {t("earlyAccess")}
+            <span className="w-6 h-6 bg-zinc-900 rounded-full flex items-center justify-center">
+              <svg aria-hidden="true" className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
           </a>
-
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-3 min-w-[44px] min-h-[44px] flex items-center justify-center"
-            aria-label="Menu"
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-nav"
-          >
-            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1">
-              {mobileOpen ? (
-                <path d="M5 5l10 10M15 5L5 15" />
-              ) : (
-                <path d="M2 6h16M2 10h16M2 14h16" />
-              )}
-            </svg>
-          </button>
         </div>
+
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden p-3 min-w-[44px] min-h-[44px] flex items-center justify-center text-white"
+          aria-label="Menu"
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+        >
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+            {open ? <path d="M5 5l10 10M15 5L5 15" /> : <path d="M3 6h14M3 10h14M3 14h14" />}
+          </svg>
+        </button>
       </div>
 
-      {mobileOpen && (
-        <div id="mobile-nav" className="md:hidden border-t border-border bg-background px-8 py-6 flex flex-col gap-4">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted hover:text-foreground py-2"
-            >
-              {link.label}
+      {open && (
+        <div id="mobile-nav" className="glass rounded-3xl mt-2 px-6 py-5 flex flex-col gap-3">
+          {links.map((l) => (
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/60 hover:text-white py-2">
+              {l.label}
             </a>
           ))}
-          <a
-            href="#early-access"
-            onClick={() => setMobileOpen(false)}
-            className="cta-overlay font-mono text-[10px] uppercase tracking-[0.25em] px-6 py-3 bg-accent text-white text-center mt-2 hover:tracking-[0.4em] transition-all duration-700"
-            style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
-          >
+          <a href="#early-access" onClick={() => setOpen(false)} className="mt-2 bg-white text-zinc-900 text-[11px] font-bold uppercase tracking-[0.1em] rounded-full py-3 text-center">
             {t("earlyAccess")}
           </a>
         </div>
