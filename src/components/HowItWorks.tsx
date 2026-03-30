@@ -16,7 +16,6 @@ export default function HowItWorks() {
 
   return (
     <section id="how-it-works" aria-labelledby="hiw-heading" className="relative bg-zinc grain overflow-hidden">
-      {/* Grid lineart overlay */}
       <div aria-hidden="true" className="absolute inset-0 opacity-[0.03]"
         style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)", backgroundSize: "60px 60px" }}
       />
@@ -64,7 +63,7 @@ export default function HowItWorks() {
             </div>
           </div>
 
-          {/* Right — 3D mock-up window */}
+          {/* Right — clinical data flow visualization */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -72,35 +71,96 @@ export default function HowItWorks() {
             transition={{ duration: 1, ease }}
             className="flex items-center justify-center"
           >
-            <div className="relative" style={{ transform: "perspective(1000px) rotateY(-3deg) rotateX(2deg)" }}>
-              <div className="glass rounded-2xl overflow-hidden w-[320px] sm:w-[380px]">
-                {/* Window chrome */}
-                <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10">
-                  <div className="w-3 h-3 rounded-full bg-white/20" />
-                  <div className="w-3 h-3 rounded-full bg-white/20" />
-                  <div className="w-3 h-3 rounded-full bg-white/20" />
-                  <span className="ml-3 text-[10px] text-white/30 font-mono">ai-native-emr</span>
+            <div className="relative w-full max-w-[400px]" style={{ transform: "perspective(1000px) rotateY(-2deg) rotateX(1deg)" }}>
+              {/* Patient data flow card */}
+              <div className="glass rounded-2xl overflow-hidden">
+                {/* Header */}
+                <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-emerald/20 flex items-center justify-center text-emerald text-xs font-bold">KM</div>
+                    <div>
+                      <div className="text-sm font-semibold text-white">Kim, Minjun</div>
+                      <div className="text-[10px] text-white/30">M, 45y · Visit #47</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald animate-pulse" />
+                    <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-emerald">Live</span>
+                  </div>
                 </div>
 
-                {/* Code snippets */}
-                <div className="p-5 space-y-3 font-mono text-[11px]">
-                  <div className="text-white/30">// ontology-engine.ts</div>
-                  <div><span className="text-emerald">const</span> <span className="text-white/80">graph</span> = <span className="text-emerald">buildKnowledgeGraph</span>(</div>
-                  <div className="pl-4 text-white/50">patient.vitals,</div>
-                  <div className="pl-4 text-white/50">patient.labs,</div>
-                  <div className="pl-4 text-white/50">patient.medications</div>
-                  <div className="text-white/80">);</div>
-                  <div className="mt-3 text-white/30">// ai-agent.ts</div>
-                  <div><span className="text-emerald">const</span> <span className="text-white/80">actions</span> = <span className="text-emerald">await</span> agent.<span className="text-emerald">analyze</span>(graph);</div>
-                  <div><span className="text-emerald">for</span> (<span className="text-emerald">const</span> action <span className="text-emerald">of</span> actions) {'{'}</div>
-                  <div className="pl-4"><span className="text-emerald">await</span> action.<span className="text-white/80">execute</span>();</div>
-                  <div>{'}'}</div>
+                {/* Data flow steps */}
+                <div className="p-6 space-y-4">
+                  {/* Voice input → SOAP */}
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-md bg-emerald/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <svg aria-hidden="true" className="w-3 h-3 text-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/40">Voice Input</div>
+                      <div className="mt-1 text-xs text-white/70 font-light italic">"Patient reports persistent headache for 3 days..."</div>
+                    </div>
+                  </div>
+
+                  <div aria-hidden="true" className="ml-3 w-px h-4 bg-emerald/20" />
+
+                  {/* Ontology mapping */}
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-md bg-emerald/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <svg aria-hidden="true" className="w-3 h-3 text-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/40">Ontology Mapping</div>
+                      <div className="mt-1.5 flex flex-wrap gap-1.5">
+                        {["G44.2 Tension HA", "R51 Headache", "BP 128/82"].map(tag => (
+                          <span key={tag} className="text-[9px] text-emerald bg-emerald/10 px-2 py-0.5 rounded-full">{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div aria-hidden="true" className="ml-3 w-px h-4 bg-emerald/20" />
+
+                  {/* AI Agent actions */}
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-md bg-emerald/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <svg aria-hidden="true" className="w-3 h-3 text-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/40">Agent Actions</div>
+                      <div className="mt-1.5 space-y-1.5">
+                        {[
+                          { label: "SOAP Note", status: "Generated" },
+                          { label: "ICD-10: G44.2", status: "Coded" },
+                          { label: "Rx: Acetaminophen 500mg", status: "Ordered" },
+                        ].map(a => (
+                          <div key={a.label} className="flex items-center justify-between text-xs">
+                            <span className="text-white/60 font-light">{a.label}</span>
+                            <span className="text-emerald text-[9px] font-bold">{a.status}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div aria-hidden="true" className="ml-3 w-px h-4 bg-emerald/20" />
+
+                  {/* Approval */}
+                  <div className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-md bg-emerald flex items-center justify-center shrink-0 mt-0.5">
+                      <svg aria-hidden="true" className="w-3 h-3 text-zinc-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M4.5 12.75l6 6 9-13.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-emerald">Ready for Approval</div>
+                      <div className="mt-1 text-xs text-white/50 font-light">One tap to confirm. You stay in control.</div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {/* Floating status tag */}
-              <div className="absolute -bottom-4 -right-4 bg-emerald text-zinc-900 text-[9px] font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full animate-[float_3s_ease-in-out_infinite]">
-                Active
+              <div className="absolute -bottom-3 -right-3 bg-emerald text-zinc-900 text-[9px] font-bold uppercase tracking-[0.15em] px-3 py-1.5 rounded-full animate-[float_3s_ease-in-out_infinite]">
+                3.2s total
               </div>
             </div>
           </motion.div>

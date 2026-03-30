@@ -79,6 +79,12 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
+          <button
+            onClick={() => { toggleLocale(); setOpen(false); }}
+            className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/60 hover:text-white py-2 text-left"
+          >
+            {locale === "en" ? "한국어" : "English"}
+          </button>
           <a href="#early-access" onClick={() => setOpen(false)} className="mt-2 bg-white text-zinc-900 text-[11px] font-bold uppercase tracking-[0.1em] rounded-full py-3 text-center">
             {t("earlyAccess")}
           </a>
