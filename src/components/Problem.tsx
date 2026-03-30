@@ -3,50 +3,23 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 export default function Problem() {
   const t = useTranslations("Problem");
-
-  const stats = [
-    { value: t("stat1Value"), label: t("stat1Label") },
-    { value: t("stat2Value"), label: t("stat2Label") },
-    { value: t("stat3Value"), label: t("stat3Label") },
-  ];
 
   const oldItems = t.raw("compareOldItems") as string[];
   const newItems = t.raw("compareNewItems") as string[];
 
   return (
     <section aria-labelledby="problem-heading" className="border-t border-border">
-      {/* Stats bar */}
-      <div className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="py-16 px-8 first:pl-0 group hover:bg-surface transition-colors"
-              >
-                <div className="font-serif text-6xl sm:text-7xl font-light tracking-tight text-accent">
-                  {stat.value}
-                </div>
-                <div className="mt-3 text-base text-muted">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Problem statement */}
       <div className="max-w-7xl mx-auto px-8 py-32">
+        {/* Header — asymmetric */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease }}
           className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20"
         >
           <div className="md:col-span-1">
@@ -69,7 +42,7 @@ export default function Problem() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.1, ease }}
           className="grid grid-cols-1 md:grid-cols-2 border border-border"
         >
           <div className="p-10 sm:p-16 bg-foreground/[0.02] border-b md:border-b-0 md:border-r border-border">

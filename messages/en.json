@@ -10,7 +10,9 @@
     "tagline": "AI Native EMR",
     "title": "EMR, Rebuilt from Scratch.",
     "titleAccent": "For AI and Patients.",
-    "subtitle": "A next-generation Electronic Medical Records system where AI isn't a plugin — it's the foundation. Natural language in, structured data out.",
+    "subtitle": "A next-generation Electronic Medical Records system where AI isn't a plugin — it's the foundation.",
+    "subhero": "Every vital sign, every lab, every note — alive with meaning, ready to act.",
+    "subheroDetail": "Built on a clinical ontology engine, AI Native EMR transforms raw medical data into a living knowledge graph. Autonomous AI agents continuously interpret context, detect patterns, and trigger actions — from real-time clinical decision support to automated coding and referral generation. Not a static database. A system that understands medicine the way clinicians do.",
     "cta": "Get Early Access",
     "ctaSecondary": "Watch Demo",
     "launchDate": "Launching December 2026"
