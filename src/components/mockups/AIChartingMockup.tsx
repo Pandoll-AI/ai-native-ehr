@@ -4,7 +4,7 @@ export default function AIChartingMockup() {
   const barHeights = [3, 8, 5, 12, 7, 15, 9, 6, 11, 4, 13, 8, 10, 5, 7, 14, 6, 9, 11, 3];
 
   return (
-    <div aria-hidden="true" className="w-[220px] h-[380px] bg-white rounded-[24px] border border-zinc-200 shadow-sm overflow-hidden flex flex-col text-[10px] text-zinc-800">
+    <div aria-hidden="true" className="w-[220px] h-[380px] bg-white rounded-[2px] border border-zinc-200 shadow-sm overflow-hidden flex flex-col text-[10px] text-zinc-800">
       {/* Status Bar */}
       <div className="flex items-center justify-between px-4 pt-2 pb-1 text-[8px] text-zinc-400">
         <span>9:41</span>

@@ -28,6 +28,19 @@ export const metadata: Metadata = {
   title: "AI Native EMR — The EMR Built for AI",
   description:
     "A next-generation Electronic Medical Records system where AI is the foundation, not a plugin. Launching December 2026.",
+  metadataBase: new URL("https://ainativeemr.com"),
+  openGraph: {
+    title: "AI Native EMR — The EMR Built for AI, Not Bolted On",
+    description:
+      "A next-generation EMR where AI is the foundation. Natural language in, structured data out. Launching Dec 2026.",
+    siteName: "AI Native EMR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Native EMR",
+    description: "The EMR Built for AI, Not Bolted On.",
+  },
 };
 
 type Props = {

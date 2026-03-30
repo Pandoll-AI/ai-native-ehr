@@ -9,6 +9,8 @@ import SmartOrderMockup from "./mockups/SmartOrderMockup";
 import DiagnosisCodingMockup from "./mockups/DiagnosisCodingMockup";
 import PatientSummaryMockup from "./mockups/PatientSummaryMockup";
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 export default function Features() {
   const t = useTranslations("Features");
 
@@ -35,12 +37,11 @@ export default function Features() {
   return (
     <section id="features" aria-labelledby="features-heading" className="border-t border-border">
       <div className="max-w-7xl mx-auto px-8 py-32">
-        {/* Header — asymmetric grid */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease }}
           className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20"
         >
           <div className="md:col-span-1">
@@ -56,7 +57,7 @@ export default function Features() {
           </div>
         </motion.div>
 
-        {/* Bento grid — primary features large, secondary compact */}
+        {/* Bento grid — max 2px border-radius */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
           {features.map((f, i) => (
             <motion.div
@@ -64,10 +65,11 @@ export default function Features() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className={`bg-background p-8 flex flex-col gap-5 group hover:bg-surface transition-colors ${
+              transition={{ duration: 0.7, delay: i * 0.08, ease }}
+              className={`bg-background p-8 flex flex-col gap-5 group hover:bg-surface transition-colors duration-700 ${
                 f.isPrimary ? "lg:col-span-2 lg:row-span-1" : "lg:col-span-1"
               }`}
+              style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
             >
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
@@ -87,9 +89,9 @@ export default function Features() {
                 </div>
               )}
 
-              {/* Scan-line accent */}
+              {/* Scan-line accent — #3b82f6 per template spec */}
               <div aria-hidden="true" className="mt-auto h-[2px] bg-border overflow-hidden">
-                <div className="h-full w-1/3 bg-accent/40 opacity-0 group-hover:opacity-100 transition-opacity" style={{ animation: "scanline 2s linear infinite" }} />
+                <div className="h-full w-1/3 bg-technical-blue opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ animation: "scanline 2s linear infinite", transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }} />
               </div>
             </motion.div>
           ))}

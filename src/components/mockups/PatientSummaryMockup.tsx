@@ -2,7 +2,7 @@
 
 export default function PatientSummaryMockup() {
   return (
-    <div aria-hidden="true" className="w-[220px] h-[380px] bg-white rounded-[24px] border border-zinc-200 shadow-sm overflow-hidden flex flex-col text-[10px] text-zinc-800">
+    <div aria-hidden="true" className="w-[220px] h-[380px] bg-white rounded-[2px] border border-zinc-200 shadow-sm overflow-hidden flex flex-col text-[10px] text-zinc-800">
       <div className="flex items-center justify-between px-4 pt-2 pb-1 text-[8px] text-zinc-400">
         <span>9:41</span>
         <div className="flex gap-1">
@@ -73,7 +73,7 @@ export default function PatientSummaryMockup() {
         </div>
 
         {/* AI Summary */}
-        <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-2">
+        <div className="bg-blue-50/50 border border-blue-100 rounded-[2px] p-2">
           <div className="text-[8px] text-blue-600 font-medium mb-0.5">AI Summary</div>
           <div className="text-[7px] text-zinc-500 leading-relaxed">
             45M with poorly controlled HTN and borderline DM control. Consider uptitrating antihypertensive. HbA1c trending up from 6.8%.

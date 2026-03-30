@@ -2,7 +2,7 @@
 
 export default function SmartOrderMockup() {
   return (
-    <div aria-hidden="true" className="w-[220px] h-[380px] bg-white rounded-[24px] border border-zinc-200 shadow-sm overflow-hidden flex flex-col text-[10px] text-zinc-800">
+    <div aria-hidden="true" className="w-[220px] h-[380px] bg-white rounded-[2px] border border-zinc-200 shadow-sm overflow-hidden flex flex-col text-[10px] text-zinc-800">
       <div className="flex items-center justify-between px-4 pt-2 pb-1 text-[8px] text-zinc-400">
         <span>9:41</span>
         <div className="flex gap-1">
@@ -19,7 +19,7 @@ export default function SmartOrderMockup() {
       {/* Natural Language Input */}
       <div className="px-4 py-3 bg-zinc-50 border-b border-zinc-100">
         <div className="text-[8px] text-zinc-400 mb-1">Natural Language Input</div>
-        <div className="bg-white border border-zinc-200 rounded-lg px-3 py-2 text-[9px]">
+        <div className="bg-white border border-zinc-200 rounded-[2px] px-3 py-2 text-[9px]">
           <span className="text-zinc-600">&quot;Tylenol 500mg three times a day for 5 days&quot;</span>
         </div>
       </div>
@@ -31,7 +31,7 @@ export default function SmartOrderMockup() {
           AI Structured Order
         </div>
 
-        <div className="bg-zinc-50 rounded-lg p-3 space-y-2 border border-zinc-100">
+        <div className="bg-zinc-50 rounded-[2px] p-3 space-y-2 border border-zinc-100">
           <div className="flex justify-between">
             <span className="text-zinc-400">Drug</span>
             <span className="font-medium">Acetaminophen</span>

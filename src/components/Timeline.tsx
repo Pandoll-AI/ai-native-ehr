@@ -43,7 +43,7 @@ export default function Timeline() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className={`p-8 sm:p-10 relative ${
                 i < quarters.length - 1 ? "border-b md:border-b-0 md:border-r border-border" : ""
               } ${q.status === "current" ? "bg-surface" : ""}`}

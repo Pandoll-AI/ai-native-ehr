@@ -2,7 +2,7 @@
 
 export default function DiagnosisCodingMockup() {
   return (
-    <div aria-hidden="true" className="w-[220px] h-[380px] bg-white rounded-[24px] border border-zinc-200 shadow-sm overflow-hidden flex flex-col text-[10px] text-zinc-800">
+    <div aria-hidden="true" className="w-[220px] h-[380px] bg-white rounded-[2px] border border-zinc-200 shadow-sm overflow-hidden flex flex-col text-[10px] text-zinc-800">
       <div className="flex items-center justify-between px-4 pt-2 pb-1 text-[8px] text-zinc-400">
         <span>9:41</span>
         <div className="flex gap-1">
@@ -18,7 +18,7 @@ export default function DiagnosisCodingMockup() {
 
       <div className="flex-1 px-4 py-3 space-y-2.5 overflow-hidden">
         {/* Primary */}
-        <div className="bg-blue-50 border border-blue-100 rounded-lg p-2.5">
+        <div className="bg-blue-50 border border-blue-100 rounded-[2px] p-2.5">
           <div className="flex items-center justify-between mb-1">
             <span className="text-[8px] text-blue-600 font-medium">PRIMARY</span>
             <span className="text-[8px] text-blue-600 font-mono">98%</span>
@@ -33,7 +33,7 @@ export default function DiagnosisCodingMockup() {
         {/* Secondary suggestions */}
         <div className="text-[8px] text-zinc-400 font-medium">Suggestions</div>
 
-        <div className="border border-zinc-100 rounded-lg p-2.5">
+        <div className="border border-zinc-100 rounded-[2px] p-2.5">
           <div className="flex items-center justify-between mb-0.5">
             <span className="font-medium text-[10px]">G43.909</span>
             <span className="text-[8px] text-zinc-400 font-mono">72%</span>
@@ -44,7 +44,7 @@ export default function DiagnosisCodingMockup() {
           </div>
         </div>
 
-        <div className="border border-zinc-100 rounded-lg p-2.5">
+        <div className="border border-zinc-100 rounded-[2px] p-2.5">
           <div className="flex items-center justify-between mb-0.5">
             <span className="font-medium text-[10px]">R51.9</span>
             <span className="text-[8px] text-zinc-400 font-mono">45%</span>
@@ -55,7 +55,7 @@ export default function DiagnosisCodingMockup() {
           </div>
         </div>
 
-        <div className="border border-zinc-100 rounded-lg p-2.5">
+        <div className="border border-zinc-100 rounded-[2px] p-2.5">
           <div className="flex items-center justify-between mb-0.5">
             <span className="font-medium text-[10px]">R51.0</span>
             <span className="text-[8px] text-zinc-400 font-mono">30%</span>

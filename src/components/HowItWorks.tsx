@@ -46,7 +46,7 @@ export default function HowItWorks() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
               className={`p-10 sm:p-16 relative ${
                 i < steps.length - 1 ? "border-b md:border-b-0 md:border-r border-border" : ""
               }`}

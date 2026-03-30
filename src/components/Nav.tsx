@@ -32,15 +32,19 @@ export default function Nav() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         scrolled
           ? "bg-background/80 backdrop-blur-xl border-b border-border"
           : "bg-transparent"
       }`}
+      style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
     >
       <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
-        <a href={`/${currentLocale}`} className="font-serif text-xl tracking-tight">
-          AI NATIVE EMR
+        {/* Brand with flanking bars */}
+        <a href={`/${currentLocale}`} className="flex items-center gap-3">
+          <span aria-hidden="true" className="w-6 h-px bg-foreground" />
+          <span className="font-serif text-xl tracking-tight uppercase">AI Native EMR</span>
+          <span aria-hidden="true" className="w-6 h-px bg-foreground" />
         </a>
 
         <div className="hidden md:flex items-center gap-10">
@@ -48,7 +52,8 @@ export default function Nav() {
             <a
               key={link.href}
               href={link.href}
-              className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted hover:text-foreground transition-colors"
+              className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted hover:text-foreground transition-colors duration-700"
+              style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
             >
               {link.label}
             </a>
@@ -59,14 +64,16 @@ export default function Nav() {
           <button
             onClick={toggleLocale}
             aria-label={currentLocale === "en" ? "Switch to Korean" : "Switch to English"}
-            className="font-mono text-[10px] uppercase tracking-[0.25em] px-4 py-3 min-w-[44px] min-h-[44px] flex items-center justify-center border border-border hover:bg-foreground/5 transition-colors"
+            className="font-mono text-[10px] uppercase tracking-[0.25em] px-4 py-3 min-w-[44px] min-h-[44px] flex items-center justify-center border border-border hover:bg-foreground/5 transition-all duration-700"
+            style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
           >
             {currentLocale === "en" ? "한국어" : "EN"}
           </button>
 
           <a
             href="#early-access"
-            className="hidden md:inline-flex font-mono text-[10px] uppercase tracking-[0.25em] px-6 py-3 bg-accent text-white hover:bg-accent/90 active:bg-accent/80 transition-all hover:tracking-[0.4em]"
+            className="cta-overlay hidden md:inline-flex font-mono text-[10px] uppercase tracking-[0.25em] px-6 py-3 bg-accent text-white transition-all duration-700 hover:tracking-[0.4em]"
+            style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
           >
             {t("earlyAccess")}
           </a>
@@ -104,7 +111,8 @@ export default function Nav() {
           <a
             href="#early-access"
             onClick={() => setMobileOpen(false)}
-            className="font-mono text-[10px] uppercase tracking-[0.25em] px-6 py-3 bg-accent text-white text-center mt-2 hover:bg-accent/90 active:bg-accent/80 transition-colors"
+            className="cta-overlay font-mono text-[10px] uppercase tracking-[0.25em] px-6 py-3 bg-accent text-white text-center mt-2 hover:tracking-[0.4em] transition-all duration-700"
+            style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
           >
             {t("earlyAccess")}
           </a>
