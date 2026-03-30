@@ -36,3 +36,8 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+@keyframes waveform {
+  0% { transform: scaleY(0.3); }
+  100% { transform: scaleY(1); }
+}

@@ -2,7 +2,7 @@
 
 export default function SmartOrderMockup() {
   return (
-    <div className="w-[220px] h-[380px] bg-white rounded-[24px] border border-zinc-200 shadow-sm overflow-hidden flex flex-col text-[10px] text-zinc-800">
+    <div aria-hidden="true" className="w-[220px] h-[380px] bg-white rounded-[24px] border border-zinc-200 shadow-sm overflow-hidden flex flex-col text-[10px] text-zinc-800">
       <div className="flex items-center justify-between px-4 pt-2 pb-1 text-[8px] text-zinc-400">
         <span>9:41</span>
         <div className="flex gap-1">

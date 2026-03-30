@@ -1,5 +1,7 @@
 "use client";
 
+import type { ReactNode } from "react";
+import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import AIChartingMockup from "./mockups/AIChartingMockup";
@@ -7,7 +9,7 @@ import SmartOrderMockup from "./mockups/SmartOrderMockup";
 import DiagnosisCodingMockup from "./mockups/DiagnosisCodingMockup";
 import PatientSummaryMockup from "./mockups/PatientSummaryMockup";
 
-const featureIcons: Record<string, React.ReactNode> = {
+const featureIcons: Record<string, ReactNode> = {
   f1: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
       <path d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" strokeLinecap="round" strokeLinejoin="round" />
@@ -50,15 +52,15 @@ const featureIcons: Record<string, React.ReactNode> = {
   ),
 };
 
-const mockupComponents: Record<string, React.ReactNode> = {
-  f1: <AIChartingMockup />,
-  f2: <SmartOrderMockup />,
-  f3: <DiagnosisCodingMockup />,
-  f5: <PatientSummaryMockup />,
-};
-
 export default function Features() {
   const t = useTranslations("Features");
+
+  const mockupComponents: Record<string, ReactNode> = useMemo(() => ({
+    f1: <AIChartingMockup />,
+    f2: <SmartOrderMockup />,
+    f3: <DiagnosisCodingMockup />,
+    f5: <PatientSummaryMockup />,
+  }), []);
 
   const features = Array.from({ length: 8 }, (_, i) => {
     const key = `f${i + 1}`;
@@ -68,7 +70,7 @@ export default function Features() {
       title: t(`${key}Title`),
       desc: t(`${key}Desc`),
       tag: t(`${key}Tag`),
-      isPrimary: i < 4 || i === 4,
+      isPrimary: i < 4,
       mockup: mockupComponents[key] || null,
     };
   });
@@ -103,7 +105,7 @@ export default function Features() {
                 f.mockup ? "flex flex-col sm:flex-row gap-6 items-start" : "flex flex-col gap-4"
               } ${!f.isPrimary ? "bg-foreground/[0.01]" : ""}`}
             >
-              <div className="flex-1 flex flex-col gap-4">
+              <div className="flex-1 flex flex-col gap-4 min-w-0">
                 <div className="flex items-center gap-3">
                   <div className="text-accent">{f.icon}</div>
                   <span className="text-[10px] font-mono uppercase tracking-widest text-muted px-2 py-0.5 border border-border rounded">
