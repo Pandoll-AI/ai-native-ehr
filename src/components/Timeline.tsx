@@ -62,12 +62,12 @@ export default function Timeline() {
 
                   {q.status === "completed" && (
                     <span className="inline-block mt-3 text-[10px] font-mono uppercase tracking-wider text-accent px-2 py-0.5 border border-accent/20 rounded">
-                      Completed
+                      {t("completedLabel")}
                     </span>
                   )}
                   {q.status === "current" && (
                     <span className="inline-block mt-3 text-[10px] font-mono uppercase tracking-wider text-accent px-2 py-0.5 bg-accent/10 border border-accent/20 rounded">
-                      In Progress
+                      {t("currentLabel")}
                     </span>
                   )}
                 </div>

@@ -92,7 +92,9 @@
     "q4Label": "Q4 2026",
     "q4Title": "Launch",
     "q4Desc": "Patient portal, beta program, regulatory compliance, public launch",
-    "q4Status": "upcoming"
+    "q4Status": "upcoming",
+    "completedLabel": "Completed",
+    "currentLabel": "In Progress"
   },
   "CTA": {
     "title": "Be Part of the Future of Healthcare",
@@ -100,7 +102,8 @@
     "placeholder": "Enter your email",
     "button": "Request Early Access",
     "note": "No spam. We'll notify you when early access opens.",
-    "demo": "Or schedule a live demo →"
+    "demo": "Or schedule a live demo →",
+    "success": "Thank you! We'll notify you when early access opens."
   },
   "Footer": {
     "brand": "AI Native EMR",

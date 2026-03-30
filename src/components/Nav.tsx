@@ -1,21 +1,20 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { usePathname, useRouter } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
+import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function Nav() {
   const t = useTranslations("Nav");
+  const currentLocale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const currentLocale = pathname.startsWith("/ko") ? "ko" : "en";
-
   function toggleLocale() {
     const newLocale = currentLocale === "en" ? "ko" : "en";
-    const newPath = pathname.replace(`/${currentLocale}`, `/${newLocale}`);
-    router.push(newPath);
+    const pathWithoutLocale = pathname.replace(new RegExp(`^/${currentLocale}`), "");
+    router.push(`/${newLocale}${pathWithoutLocale || ""}`);
   }
 
   const links = [

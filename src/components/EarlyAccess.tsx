@@ -2,9 +2,19 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function EarlyAccess() {
   const t = useTranslations("CTA");
+  const [submitted, setSubmitted] = useState(false);
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const email = new FormData(form).get("email") as string;
+    if (!email) return;
+    setSubmitted(true);
+  }
 
   return (
     <section id="early-access" className="py-32 border-t border-border">
@@ -21,22 +31,34 @@ export default function EarlyAccess() {
           </h2>
           <p className="mt-4 text-lg text-muted">{t("subtitle")}</p>
 
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="mt-10 flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-          >
-            <input
-              type="email"
-              placeholder={t("placeholder")}
-              className="flex-1 px-4 py-3 text-sm border border-border rounded bg-surface focus:outline-none focus:border-accent transition-colors"
-            />
-            <button
-              type="submit"
-              className="px-6 py-3 text-sm font-medium bg-foreground text-background rounded hover:bg-foreground/90 transition-colors whitespace-nowrap"
+          {submitted ? (
+            <div className="mt-10 p-6 border border-accent/20 rounded bg-accent/5">
+              <p className="text-accent font-medium">{t("success")}</p>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="mt-10 flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
             >
-              {t("button")}
-            </button>
-          </form>
+              <label htmlFor="email-input" className="sr-only">
+                {t("placeholder")}
+              </label>
+              <input
+                id="email-input"
+                name="email"
+                type="email"
+                required
+                placeholder={t("placeholder")}
+                className="flex-1 px-4 py-3 text-sm border border-border rounded bg-surface focus:outline-none focus:border-accent transition-colors"
+              />
+              <button
+                type="submit"
+                className="px-6 py-3 text-sm font-medium bg-foreground text-background rounded hover:bg-foreground/90 transition-colors whitespace-nowrap"
+              >
+                {t("button")}
+              </button>
+            </form>
+          )}
 
           <p className="mt-4 text-xs text-muted">{t("note")}</p>
 
