@@ -2,6 +2,10 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
+import AIChartingMockup from "./mockups/AIChartingMockup";
+import SmartOrderMockup from "./mockups/SmartOrderMockup";
+import DiagnosisCodingMockup from "./mockups/DiagnosisCodingMockup";
+import PatientSummaryMockup from "./mockups/PatientSummaryMockup";
 
 const featureIcons: Record<string, React.ReactNode> = {
   f1: (
@@ -46,17 +50,26 @@ const featureIcons: Record<string, React.ReactNode> = {
   ),
 };
 
+const mockupComponents: Record<string, React.ReactNode> = {
+  f1: <AIChartingMockup />,
+  f2: <SmartOrderMockup />,
+  f3: <DiagnosisCodingMockup />,
+  f5: <PatientSummaryMockup />,
+};
+
 export default function Features() {
   const t = useTranslations("Features");
 
   const features = Array.from({ length: 8 }, (_, i) => {
-    const key = `f${i + 1}` as keyof typeof featureIcons;
+    const key = `f${i + 1}`;
     return {
+      key,
       icon: featureIcons[key],
       title: t(`${key}Title`),
       desc: t(`${key}Desc`),
       tag: t(`${key}Tag`),
-      isPrimary: i < 4,
+      isPrimary: i < 4 || i === 4,
+      mockup: mockupComponents[key] || null,
     };
   });
 
@@ -81,31 +94,29 @@ export default function Features() {
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border rounded overflow-hidden">
           {features.map((f, i) => (
             <motion.div
-              key={i}
+              key={f.key}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className={`p-8 sm:p-10 bg-surface flex flex-col gap-4 ${
-                f.isPrimary ? "" : "bg-foreground/[0.01]"
-              }`}
+              className={`p-8 sm:p-10 bg-surface ${
+                f.mockup ? "flex flex-col sm:flex-row gap-6 items-start" : "flex flex-col gap-4"
+              } ${!f.isPrimary ? "bg-foreground/[0.01]" : ""}`}
             >
-              <div className="flex items-center gap-3">
-                <div className="text-accent">{f.icon}</div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-muted px-2 py-0.5 border border-border rounded">
-                  {f.tag}
-                </span>
+              <div className="flex-1 flex flex-col gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="text-accent">{f.icon}</div>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-muted px-2 py-0.5 border border-border rounded">
+                    {f.tag}
+                  </span>
+                </div>
+                <h3 className="text-xl font-semibold tracking-tight">{f.title}</h3>
+                <p className="text-sm text-muted leading-relaxed">{f.desc}</p>
               </div>
-              <h3 className="text-xl font-semibold tracking-tight">{f.title}</h3>
-              <p className="text-sm text-muted leading-relaxed">{f.desc}</p>
 
-              {f.isPrimary && (
-                <div className="mt-4 aspect-[9/16] max-w-[200px] bg-foreground/[0.03] border border-border rounded-2xl overflow-hidden flex items-center justify-center">
-                  <div className="text-xs text-muted font-mono p-4 text-center">
-                    [Mobile Mockup]
-                    <br />
-                    {f.title}
-                  </div>
+              {f.mockup && (
+                <div className="shrink-0 hidden lg:block">
+                  {f.mockup}
                 </div>
               )}
             </motion.div>
