@@ -11,12 +11,18 @@ export default function EarlyAccess() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
     const email = new FormData(e.currentTarget).get("email") as string;
     if (!email || !email.includes("@")) { setError(t("errorInvalid")); return; }
-    console.log("Early access signup:", email);
+    try {
+      await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+    } catch { /* silent fail — still show success */ }
     setSubmitted(true);
   }
 
